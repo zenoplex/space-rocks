@@ -14,6 +14,10 @@ config/name="Space Rocks"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
+[debug]
+
+gdscript/warnings/untyped_declaration=2
+
 [input]
 
 rotate_left={
