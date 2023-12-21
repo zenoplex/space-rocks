@@ -10,6 +10,9 @@ radius = 29.0172
 [node name="Player" type="RigidBody2D"]
 script = ExtResource("1_21n7p")
 bullet_scene = ExtResource("2_g6lr5")
+fire_rate = null
+engine_power = null
+spin_power = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708
@@ -26,3 +29,5 @@ position = Vector2(31, 2.08165e-12)
 [node name="GunCooldownTimer" type="Timer" parent="."]
 one_shot = true
 autostart = true
+
+[connection signal="timeout" from="GunCooldownTimer" to="." method="_on_gun_cooldown_timer_timeout"]

@@ -75,3 +75,5 @@ func _integrate_forces(physics_state: PhysicsDirectBodyState2D) -> void:
 	transform2d.origin.y = wrap(transform2d.origin.y, -half_size.y , screensize.y + half_size.y)
 	physics_state.transform = transform2d
 	
+func _on_gun_cooldown_timer_timeout() -> void:
+	can_shoot = true
