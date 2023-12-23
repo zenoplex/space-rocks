@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4qc7y3hvrt5x"]
+[gd_scene load_steps=4 format=3 uid="uid://c4qc7y3hvrt5x"]
 
 [ext_resource type="Texture2D" uid="uid://bqqwkiiskbvh8" path="res://assets/space_background.png" id="1_cd36w"]
 [ext_resource type="PackedScene" uid="uid://dsf5dyyo0cnxq" path="res://player/player.tscn" id="1_hiybo"]
+
+[sub_resource type="Curve2D" id="Curve2D_y07wi"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1152, 0, 0, 0, 0, 0, 1152, 640, 0, 0, 0, 0, 0, 648, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1152, 0)
+}
+point_count = 5
 
 [node name="Main" type="Node"]
 
@@ -11,3 +17,10 @@ scale = Vector2(0.6, 0.6)
 texture = ExtResource("1_cd36w")
 
 [node name="Player" parent="." instance=ExtResource("1_hiybo")]
+
+[node name="RockPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_y07wi")
+
+[node name="RockSpawn" type="PathFollow2D" parent="RockPath"]
+position = Vector2(1152, 0)
+rotation = 1.5708
