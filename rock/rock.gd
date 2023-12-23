@@ -6,7 +6,7 @@ var scale_factor: float = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	pass
 
 func start(_position: Vector2, _velocity: Vector2, _size: int) -> void:
 	position = _position
@@ -22,6 +22,8 @@ func start(_position: Vector2, _velocity: Vector2, _size: int) -> void:
 	linear_velocity = _velocity
 	angular_velocity = randf_range(-PI, PI)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _integrate_forces(physics_state: PhysicsDirectBodyState2D) -> void:
+	var transform2d: Transform2D = physics_state.transform
+	transform2d.origin.x = wrap(transform2d.origin.x, -radius, screensize.x + radius)
+	transform2d.origin.y = wrap(transform2d.origin.y, -radius, screensize.y + radius)
+	physics_state.transform = transform2d
