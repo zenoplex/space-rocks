@@ -69,6 +69,7 @@ func _physics_process(_delta: float) -> void:
 	constant_torque = rotation_dir * spin_power
 
 func _integrate_forces(physics_state: PhysicsDirectBodyState2D) -> void:
+	# TODO: half_size should be cached as instance variable
 	var half_size: Vector2 = size / 2
 	var transform2d: Transform2D = physics_state.transform
 	transform2d.origin.x = wrap(transform2d.origin.x, -half_size.x , screensize.x + half_size.x)
