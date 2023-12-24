@@ -33,7 +33,7 @@ func update_score(score: int) -> void:
 	score_label.text = str(score)
 
 func update_lives(lives: int) -> void:
-	var children: Array[Node] = lives_counter.get_children()
+	var children := lives_counter.get_children()
 	# Can't get index of loop in for?
 	# for child in children: will error since Node > int is an error
 	for index in len(children):
