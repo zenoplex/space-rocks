@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+signal start_game
+
 @onready var lives_counter: HBoxContainer = $MarginContainer/HBoxContainer/LivesCounter
 @onready var score_label: Label = $MarginContainer/HBoxContainer/ScoreLabel
 @onready var message_label: Label = $VBoxContainer/MessageLabel
@@ -16,4 +18,5 @@ func _process(delta: float) -> void:
 
 
 func _on_start_button_pressed() -> void:
-	pass # Replace with function body.
+	start_button.hide()
+	start_game.emit()
