@@ -1,12 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://bc4p5vxei7r8s"]
+[gd_scene load_steps=6 format=3 uid="uid://bc4p5vxei7r8s"]
 
 [ext_resource type="FontFile" uid="uid://bflxm1j2nasx2" path="res://assets/kenvector_future_thin.ttf" id="1_8m8oi"]
+[ext_resource type="Script" path="res://hud/hud.gd" id="1_rvhus"]
 [ext_resource type="Texture2D" uid="uid://dhu0cmb1owl3b" path="res://assets/player_small.png" id="2_4kshx"]
 [ext_resource type="Texture2D" uid="uid://vgdhrpxruff1" path="res://assets/play_button.png" id="3_v1tfr"]
 [ext_resource type="Texture2D" uid="uid://b0to8rhnwlpdq" path="res://assets/play_button_h.png" id="4_aohq5"]
 
 [node name="HUD" type="CanvasLayer"]
 layer = -1
+script = ExtResource("1_rvhus")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
@@ -31,21 +33,21 @@ theme_override_fonts/font = ExtResource("1_8m8oi")
 theme_override_font_sizes/font_size = 64
 text = "0"
 
-[node name="LivesContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="LivesCounter" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="L1" type="TextureRect" parent="MarginContainer/HBoxContainer/LivesContainer"]
+[node name="L1" type="TextureRect" parent="MarginContainer/HBoxContainer/LivesCounter"]
 layout_mode = 2
 texture = ExtResource("2_4kshx")
 stretch_mode = 5
 
-[node name="L2" type="TextureRect" parent="MarginContainer/HBoxContainer/LivesContainer"]
+[node name="L2" type="TextureRect" parent="MarginContainer/HBoxContainer/LivesCounter"]
 layout_mode = 2
 texture = ExtResource("2_4kshx")
 stretch_mode = 5
 
-[node name="L3" type="TextureRect" parent="MarginContainer/HBoxContainer/LivesContainer"]
+[node name="L3" type="TextureRect" parent="MarginContainer/HBoxContainer/LivesCounter"]
 layout_mode = 2
 texture = ExtResource("2_4kshx")
 stretch_mode = 5
@@ -61,7 +63,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 100
 
-[node name="Message" type="Label" parent="VBoxContainer"]
+[node name="MessageLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_8m8oi")
 theme_override_font_sizes/font_size = 64
@@ -74,3 +76,5 @@ layout_mode = 2
 size_flags_horizontal = 4
 texture_normal = ExtResource("3_v1tfr")
 texture_hover = ExtResource("4_aohq5")
+
+[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
