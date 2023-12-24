@@ -12,13 +12,13 @@ func _ready() -> void:
 		var pos: Vector2 = $RockPath/RockSpawn.position
 		var vel: Vector2 = Vector2.RIGHT.rotated(randf_range(0, TAU)) * randf_range(50, 125)
 		print(vel)
-		spawn_rock(3, pos, vel)
+		spawn_rock(pos, vel, i + 1)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
-func spawn_rock(size: int, position: Vector2, velocity: Vector2) -> void:
+func spawn_rock(position: Vector2, velocity: Vector2, size: int) -> void:
 	var node: Node = rock_scene.instantiate()
 	node.screensize = screensize
 	node.start(position, velocity, size)
