@@ -1,4 +1,7 @@
 extends RigidBody2D
+# emits size, radius, position, linear_velocity)
+signal exploded
+
 var screensize: Vector2 = Vector2.ZERO
 var size: int = 0
 var radius: int = 0
@@ -12,6 +15,8 @@ func start(_position: Vector2, _velocity: Vector2, _size: int) -> void:
 	position = _position
 	size = _size
 	mass = 1.5 * size
+	$Explosion.hide()
+	$Explosion.scale = Vector2.ONE * size
 
 	var calc_scale: float = scale_factor * size
 	$Sprite2D.scale = Vector2.ONE * calc_scale
@@ -29,5 +34,13 @@ func _integrate_forces(physics_state: PhysicsDirectBodyState2D) -> void:
 	physics_state.transform = transform2d
 
 func explode() -> void:
-	# TODO: implement explision
+	$CollisionShape2D.set_deferred("disabled", true)
+	$Sprite2D.hide()
+	linear_velocity = Vector2.ZERO
+	angular_velocity = 0
+	
+	exploded.emit(size, radius, position, linear_velocity)
+	$Explosion/AnimationPlayer.play("explosion")
+	$Explosion.show()
+	await $Explosion/AnimationPlayer.animation_finished
 	queue_free()
