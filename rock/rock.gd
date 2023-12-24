@@ -2,7 +2,7 @@ extends RigidBody2D
 var screensize: Vector2 = Vector2.ZERO
 var size: int = 0
 var radius: int = 0
-var scale_factor: float = 0.0
+var scale_factor: float = 0.2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
