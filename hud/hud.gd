@@ -38,3 +38,7 @@ func update_lives(lives: int) -> void:
 	# for child in children: will error since Node > int is an error
 	for index in len(children):
 		children[index].visible = index < lives
+
+func game_over() -> void:
+	show_message("Game Over")
+	start_button.show()
