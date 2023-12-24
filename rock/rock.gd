@@ -27,3 +27,7 @@ func _integrate_forces(physics_state: PhysicsDirectBodyState2D) -> void:
 	transform2d.origin.x = wrap(transform2d.origin.x, -radius, screensize.x + radius)
 	transform2d.origin.y = wrap(transform2d.origin.y, -radius, screensize.y + radius)
 	physics_state.transform = transform2d
+
+func explode() -> void:
+	# TODO: implement explision
+	queue_free()
