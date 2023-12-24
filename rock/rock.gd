@@ -36,10 +36,11 @@ func _integrate_forces(physics_state: PhysicsDirectBodyState2D) -> void:
 func explode() -> void:
 	$CollisionShape2D.set_deferred("disabled", true)
 	$Sprite2D.hide()
+	
+	exploded.emit(size, radius, position, linear_velocity)
 	linear_velocity = Vector2.ZERO
 	angular_velocity = 0
 	
-	exploded.emit(size, radius, position, linear_velocity)
 	$Explosion/AnimationPlayer.play("explosion")
 	$Explosion.show()
 	await $Explosion/AnimationPlayer.animation_finished
