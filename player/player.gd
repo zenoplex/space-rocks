@@ -6,7 +6,7 @@ extends RigidBody2D
 @export var spin_power: int = 8000
 
 enum Status { INIT, ALIVE, INVULNERABLE, DEAD }
-var state := Status.INIT
+var state :Status = Status.INIT
 var thrust := Vector2.ZERO
 var rotation_dir := 0.0
 var screensize := Vector2.ZERO
