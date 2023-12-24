@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://c4qc7y3hvrt5x"]
+[gd_scene load_steps=7 format=3 uid="uid://c4qc7y3hvrt5x"]
 
 [ext_resource type="Texture2D" uid="uid://bqqwkiiskbvh8" path="res://assets/space_background.png" id="1_cd36w"]
 [ext_resource type="Script" path="res://Main/main.gd" id="1_fdmdb"]
 [ext_resource type="PackedScene" uid="uid://dsf5dyyo0cnxq" path="res://player/player.tscn" id="1_hiybo"]
 [ext_resource type="PackedScene" uid="uid://cerwawbfvxcfm" path="res://rock/rock.tscn" id="2_7wp8g"]
+[ext_resource type="PackedScene" uid="uid://bc4p5vxei7r8s" path="res://hud/hud.tscn" id="5_t5qik"]
 
 [sub_resource type="Curve2D" id="Curve2D_y07wi"]
 _data = {
@@ -14,6 +15,9 @@ point_count = 5
 [node name="Main" type="Node"]
 script = ExtResource("1_fdmdb")
 rock_scene = ExtResource("2_7wp8g")
+
+[node name="HUD" parent="." instance=ExtResource("5_t5qik")]
+layer = 0
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 position = Vector2(576, 324)
