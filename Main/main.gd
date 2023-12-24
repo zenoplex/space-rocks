@@ -1,6 +1,7 @@
 extends Node
 @export var rock_scene: PackedScene
 
+const offsets: Array[int] = [-1 ,1]
 var screensize: Vector2 = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
@@ -22,6 +23,15 @@ func spawn_rock(position: Vector2, velocity: Vector2, size: int) -> void:
 	var node: Node = rock_scene.instantiate()
 	node.screensize = screensize
 	node.start(position, velocity, size)
-	# TODO: maybe replace with call_deferred("add_child", node)
-	add_child(node)
+	call_deferred("add_child", node)
+	node.exploded.connect(self._on_rock_exploded)
 	
+func _on_rock_exploded(size: int, radius: int, position: Vector2, linear_velocity: Vector2) -> void:
+	if size < 2:
+		return
+	
+	for offset in offsets:
+		var direction: Vector2 = $Player.position.direction_to(position).orthogonal() * offset
+		var new_position: Vector2 = position + direction * radius
+		var new_velocity: Vector2 = direction * linear_velocity.length() * 1.1
+		spawn_rock(new_position, new_velocity, size - 1)
