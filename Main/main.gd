@@ -30,6 +30,7 @@ func new_game() -> void:
 	score = 0
 	hud.update_score(score)
 	hud.show_message("Get Ready!")
+	player.reset()
 	# HUD show_message starts timer but it's not obvious from the code
 	# Maybe should emit a signal instead
 	await hud.get_node('Timer').timeout

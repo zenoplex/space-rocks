@@ -71,11 +71,23 @@ func get_input() -> void:
 	if Input.is_action_pressed("shoot") and can_shoot:
 		shoot()
 
+func reset() -> void:
+	reset_pos = true
+	lives = 3
+	$Sprite2D.show()
+	change_state(Status.ALIVE)
+
 func _physics_process(_delta: float) -> void:
 	constant_force = thrust
 	constant_torque = rotation_dir * spin_power
 
 func _integrate_forces(physics_state: PhysicsDirectBodyState2D) -> void:
+	if (reset_pos):
+		reset_pos = false
+		physics_state.transform.origin = screensize * 0.5
+		physics_state.linear_velocity = Vector2.ZERO
+		physics_state.angular_velocity = 0.0
+	
 	# TODO: half_size should be cached as instance variable
 	var half_size := size / 2
 	var transform2d := physics_state.transform
