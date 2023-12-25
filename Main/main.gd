@@ -6,6 +6,7 @@ var score := 0
 var playing := false
 @onready var player: Player = $Player
 @onready var hud: HUD = $HUD
+@onready var rockSpawn: PathFollow2D = $RockPath/RockSpawn
 
 # Type annotation is required for for loops
 const offsets: Array[int] = [-1 ,1]
@@ -53,8 +54,8 @@ func spawn_rock(position: Vector2, velocity: Vector2, size: int) -> void:
 
 ## get rock initial position
 func getRockSpawnPosition() -> Vector2:
-	$RockPath/RockSpawn.progress = randi()
-	return $RockPath/RockSpawn.position
+	rockSpawn.progress = randi()
+	return rockSpawn.position
 
 ## get rock initial velocity
 func getRockSpawnVelocity() -> Vector2:
