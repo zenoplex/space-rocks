@@ -1,3 +1,4 @@
+class_name HUD
 extends CanvasLayer
 
 signal start_game

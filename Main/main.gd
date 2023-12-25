@@ -4,6 +4,8 @@ extends Node
 var level := 0
 var score := 0
 var playing := false
+@onready var player: Player = $Player
+@onready var hud: HUD = $HUD
 
 # Type annotation is required for for loops
 const offsets: Array[int] = [-1 ,1]
@@ -25,22 +27,22 @@ func new_game() -> void:
 	get_tree().call_group("rocks", "queue_free")
 	level = 0
 	score = 0
-	$HUD.update_score(score)
-	$HUD.show_message("Get Ready!")
+	hud.update_score(score)
+	hud.show_message("Get Ready!")
 	# HUD show_message starts timer but it's not obvious from the code
 	# Maybe should emit a signal instead
-	await $HUD/Timer.timeout
+	await hud.get_node('Timer').timeout
 	playing = true
 
 func new_level() -> void:
 	level += 1
-	$HUD.show_message("Wave %s" % level)
+	hud.show_message("Wave %s" % level)
 	for i in level:
 		spawn_rock(getRockSpawnPosition(), getRockSpawnVelocity(), 3)
 
 func game_over() -> void:
 	playing = false
-	$HUD.game_over()
+	hud.game_over()
 
 func spawn_rock(position: Vector2, velocity: Vector2, size: int) -> void:
 	var node := rock_scene.instantiate()
@@ -63,7 +65,7 @@ func _on_rock_exploded(size: int, radius: int, position: Vector2, linear_velocit
 		return
 	
 	for offset in offsets:
-		var direction: Vector2 = $Player.position.direction_to(position).orthogonal() * offset
+		var direction: Vector2 = player.position.direction_to(position).orthogonal() * offset
 		var new_position := position + direction * radius
 		var new_velocity := direction * linear_velocity.length() * 1.1
 		spawn_rock(new_position, new_velocity, size - 1)
