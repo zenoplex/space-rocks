@@ -1,6 +1,10 @@
 extends Node
 @export var rock_scene: PackedScene
 
+var level := 0
+var score := 0
+var playing := false
+
 # Type annotation is required for for loops
 const offsets: Array[int] = [-1 ,1]
 var screensize := Vector2.ZERO
@@ -13,12 +17,32 @@ func _ready() -> void:
 		$RockPath/RockSpawn.progress = randi()
 		var pos: Vector2 = $RockPath/RockSpawn.position
 		var vel := Vector2.RIGHT.rotated(randf_range(0, TAU)) * randf_range(50, 125)
-		print(vel)
 		spawn_rock(pos, vel, i + 1)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _process(_delta: float) -> void:
+	if not playing:
+		return
+	if get_tree().get_nodes_in_group("rocks").size() == 0:
+		new_level()
+
+func new_game() -> void:
+	# Clear any rocks that are still in the scene
+	get_tree().call_group("rocks", "queue_free")
+	level = 0
+	score = 0
+	$HUD.update_score(score)
+	$HUD.show_message("Get Ready!")
+	# HUD show_message starts timer but it's not obvious from the code
+	# Maybe should emit a signal instead
+	await $HUD/Timer.timeout
+	playing = true
+
+func new_level() -> void:
+	level += 1
+	$HUD.show_message("Wave %s" % level)
+	for i in level:
+		spawn_rock(getRockSpawnPosition(), getRockSpawnVelocity(), 3)
 
 func spawn_rock(position: Vector2, velocity: Vector2, size: int) -> void:
 	var node := rock_scene.instantiate()
@@ -26,7 +50,14 @@ func spawn_rock(position: Vector2, velocity: Vector2, size: int) -> void:
 	node.start(position, velocity, size)
 	call_deferred("add_child", node)
 	node.exploded.connect(self._on_rock_exploded)
-	
+
+func getRockSpawnPosition() -> Vector2:
+	$RockPath/RockSpawn.progress = randi()
+	return $RockPath/RockSpawn.position
+
+func getRockSpawnVelocity() -> Vector2:
+	return Vector2.RIGHT.rotated(randf_range(0, TAU)) * randf_range(50, 125)	
+
 func _on_rock_exploded(size: int, radius: int, position: Vector2, linear_velocity: Vector2) -> void:
 	if size < 2:
 		return
