@@ -24,6 +24,7 @@ func _on_timer_timeout() -> void:
 	message_label.hide()
 	message_label.text = ""
 
+## Shows message and starts timer
 func show_message(text: String) -> void:
 	message_label.text = text
 	message_label.show()
