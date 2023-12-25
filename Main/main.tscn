@@ -35,3 +35,5 @@ curve = SubResource("Curve2D_y07wi")
 [node name="RockSpawn" type="PathFollow2D" parent="RockPath"]
 position = Vector2(1152, 0)
 rotation = 1.5708
+
+[connection signal="start_game" from="HUD" to="." method="_on_hud_start_game"]
