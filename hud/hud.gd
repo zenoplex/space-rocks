@@ -40,6 +40,8 @@ func update_lives(lives: int) -> void:
 	for index in len(children):
 		children[index].visible = index < lives
 
+## Displays game over message and shows start button
 func game_over() -> void:
 	show_message("Game Over")
+	await $Timer.timeout
 	start_button.show()

@@ -38,6 +38,10 @@ func new_level() -> void:
 	for i in level:
 		spawn_rock(getRockSpawnPosition(), getRockSpawnVelocity(), 3)
 
+func game_over() -> void:
+	playing = false
+	$HUD.game_over()
+
 func spawn_rock(position: Vector2, velocity: Vector2, size: int) -> void:
 	var node := rock_scene.instantiate()
 	node.screensize = screensize
