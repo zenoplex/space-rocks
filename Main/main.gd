@@ -14,10 +14,7 @@ func _ready() -> void:
 	screensize = get_viewport().get_visible_rect().size
 	
 	for i in 3:
-		$RockPath/RockSpawn.progress = randi()
-		var pos: Vector2 = $RockPath/RockSpawn.position
-		var vel := Vector2.RIGHT.rotated(randf_range(0, TAU)) * randf_range(50, 125)
-		spawn_rock(pos, vel, i + 1)
+		spawn_rock(getRockSpawnPosition(), getRockSpawnVelocity(), 3)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -51,10 +48,12 @@ func spawn_rock(position: Vector2, velocity: Vector2, size: int) -> void:
 	call_deferred("add_child", node)
 	node.exploded.connect(self._on_rock_exploded)
 
+## get rock initial position
 func getRockSpawnPosition() -> Vector2:
 	$RockPath/RockSpawn.progress = randi()
 	return $RockPath/RockSpawn.position
 
+## get rock initial velocity
 func getRockSpawnVelocity() -> Vector2:
 	return Vector2.RIGHT.rotated(randf_range(0, TAU)) * randf_range(50, 125)	
 
