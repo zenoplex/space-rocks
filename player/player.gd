@@ -1,6 +1,12 @@
 class_name Player
 extends RigidBody2D
 
+## Emits lives_changed(lives: int)
+signal lives_changed
+signal dead
+var reset_pos := false
+var lives := 0: set = set_lives
+
 @export var bullet_scene: PackedScene
 @export var fire_rate: float = 0.25
 @export var engine_power: int = 500
@@ -79,3 +85,11 @@ func _integrate_forces(physics_state: PhysicsDirectBodyState2D) -> void:
 	
 func _on_gun_cooldown_timer_timeout() -> void:
 	can_shoot = true
+
+func set_lives(value: int) -> void:
+	lives = value
+	lives_changed.emit(lives)
+	if (lives < 1):
+		change_state(Status.DEAD)
+	else:
+		change_state(Status.INVULNERABLE)
