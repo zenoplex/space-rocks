@@ -32,6 +32,8 @@ func _ready() -> void:
 	explosion.hide()
 	invulnerabilityTimer.one_shot = true
 	invulnerabilityTimer.wait_time = 2.0
+	contact_monitor = true
+	max_contacts_reported = 1
 
 	gunCooldownTimer.wait_time = fire_rate
 	linear_damp = 1.0
@@ -127,3 +129,16 @@ func set_lives(value: int) -> void:
 
 func _on_invulnerability_timer_timeout() -> void:
 	change_state(Status.ALIVE)
+
+func _explode() -> void:
+	explosion.show()
+	# TODO: Add function in Explotion scene to hide access to AnimationPlayer
+	explosion.get_node("AnimationPlayer").play("explosion")
+	await explosion.get_node("AnimationPlayer").animation_finished
+	explosion.hide()
+
+func _on_body_entered(body:Node) -> void:
+	if body.is_in_group("rocks"):
+		body.explode()
+		lives -= 1
+		_explode()
