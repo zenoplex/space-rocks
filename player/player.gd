@@ -55,7 +55,7 @@ func shoot() -> void:
 	
 	can_shoot = false
 	$GunCooldownTimer.start()
-	var node := bullet_scene.instantiate()
+	var node: Bullet = bullet_scene.instantiate() as Bullet
 	node.start($Muzzle.global_transform)
 	get_tree().root.add_child(node)
 
