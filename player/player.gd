@@ -4,13 +4,13 @@ extends RigidBody2D
 ## Emits lives_changed(lives: int)
 signal lives_changed
 signal dead
-var reset_pos := false
-var lives := 0: set = set_lives
 
 @export var bullet_scene: PackedScene
 @export var fire_rate: float = 0.25
 @export var engine_power: int = 500
 @export var spin_power: int = 8000
+
+@onready var explosion: Node2D = get_node("Explosion")
 
 enum Status { INIT, ALIVE, INVULNERABLE, DEAD }
 var state :Status = Status.INIT
@@ -19,9 +19,12 @@ var rotation_dir := 0.0
 var screensize := Vector2.ZERO
 var size := Vector2.ZERO
 var can_shoot := true
+var reset_pos := false
+var lives := 0: set = set_lives
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	explosion.hide()
 	$GunCooldownTimer.wait_time = fire_rate
 	linear_damp = 1.0
 	angular_damp = 5.0
