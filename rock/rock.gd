@@ -7,6 +7,8 @@ var size := 0
 var radius := 0
 var scale_factor := 0.2
 
+@onready var explosion: Explosion = get_node("Explosion")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
@@ -41,7 +43,5 @@ func explode() -> void:
 	linear_velocity = Vector2.ZERO
 	angular_velocity = 0
 	
-	$Explosion/AnimationPlayer.play("explosion")
-	$Explosion.show()
-	await $Explosion/AnimationPlayer.animation_finished
+	await explosion.play()
 	queue_free()

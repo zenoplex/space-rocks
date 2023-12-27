@@ -10,7 +10,7 @@ signal dead
 @export var engine_power: int = 500
 @export var spin_power: int = 8000
 
-@onready var explosion: Node2D = get_node("Explosion")
+@onready var explosion: Explosion = get_node("Explosion")
 @onready var invulnerabilityTimer: Timer = get_node("InvulnerabilityTimer")
 @onready var collisionShape2D: CollisionShape2D = get_node("CollisionShape2D")
 @onready var gunCooldownTimer: Timer = get_node("GunCooldownTimer")
@@ -131,11 +131,7 @@ func _on_invulnerability_timer_timeout() -> void:
 	change_state(Status.ALIVE)
 
 func _explode() -> void:
-	explosion.show()
-	# TODO: Add function in Explotion scene to hide access to AnimationPlayer
-	explosion.get_node("AnimationPlayer").play("explosion")
-	await explosion.get_node("AnimationPlayer").animation_finished
-	explosion.hide()
+	await explosion.play()
 
 func _on_body_entered(body:Node) -> void:
 	if body.is_in_group("rocks"):
