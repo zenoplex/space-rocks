@@ -12,6 +12,10 @@ signal dead
 
 @onready var explosion: Node2D = get_node("Explosion")
 @onready var invulnerabilityTimer: Timer = get_node("InvulnerabilityTimer")
+@onready var collisionShape2D: CollisionShape2D = get_node("CollisionShape2D")
+@onready var gunCooldownTimer: Timer = get_node("GunCooldownTimer")
+@onready var muzzle: Node2D = get_node("Muzzle")
+@onready var sprite2D: Sprite2D = get_node("Sprite2D")
 
 enum Status { INIT, ALIVE, INVULNERABLE, DEAD }
 var state :Status = Status.INIT
@@ -29,24 +33,24 @@ func _ready() -> void:
 	invulnerabilityTimer.one_shot = true
 	invulnerabilityTimer.wait_time = 2.0
 
-	$GunCooldownTimer.wait_time = fire_rate
+	gunCooldownTimer.wait_time = fire_rate
 	linear_damp = 1.0
 	angular_damp = 5.0
 	screensize = get_viewport_rect().size
-	size = $CollisionShape2D.shape.get_rect().size
+	size = collisionShape2D.shape.get_rect().size
 	# TODO: set to INIT after testing
 	change_state(Status.ALIVE)
 
 func change_state(new_state: Status) -> void:
 	match new_state:
 		Status.INIT:
-			$CollisionShape2D.set_deferred("disabled", false)
+			collisionShape2D.set_deferred("disabled", false)
 		Status.ALIVE:
-			$CollisionShape2D.set_deferred("disabled", false)
+			collisionShape2D.set_deferred("disabled", false)
 		Status.INVULNERABLE:
-			$CollisionShape2D.set_deferred("disabled", true)
+			collisionShape2D.set_deferred("disabled", true)
 		Status.DEAD:
-			$CollisionShape2D.set_deferred("disabled", true)
+			collisionShape2D.set_deferred("disabled", true)
 		_: 
 			assert(false, "Invalid state passed to change_state: %s" % new_state)
 	
@@ -61,9 +65,9 @@ func shoot() -> void:
 		return
 	
 	can_shoot = false
-	$GunCooldownTimer.start()
+	gunCooldownTimer.start()
 	var node: Bullet = bullet_scene.instantiate() as Bullet
-	node.start($Muzzle.global_transform)
+	node.start(muzzle.global_transform)
 	get_tree().root.add_child(node)
 
 func get_input() -> void:
@@ -81,7 +85,7 @@ func get_input() -> void:
 func reset() -> void:
 	reset_pos = true
 	lives = 3
-	$Sprite2D.show()
+	sprite2D.show()
 	change_state(Status.ALIVE)
 
 func _physics_process(_delta: float) -> void:
