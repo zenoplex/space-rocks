@@ -32,3 +32,4 @@ autostart = true
 [node name="Explosion" parent="." instance=ExtResource("4_1s3aq")]
 
 [connection signal="timeout" from="GunCooldownTimer" to="." method="_on_gun_cooldown_timer_timeout"]
+[connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]

@@ -45,12 +45,20 @@ func change_state(new_state: Status) -> void:
 	match new_state:
 		Status.INIT:
 			collisionShape2D.set_deferred("disabled", false)
+			sprite2D.modulate.a = 0.5
 		Status.ALIVE:
 			collisionShape2D.set_deferred("disabled", false)
+			sprite2D.modulate.a = 1.0
 		Status.INVULNERABLE:
 			collisionShape2D.set_deferred("disabled", true)
+			sprite2D.modulate.a = 0.5
+			invulnerabilityTimer.start()
 		Status.DEAD:
 			collisionShape2D.set_deferred("disabled", true)
+			sprite2D.hide()
+			linear_velocity = Vector2.ZERO
+			angular_velocity = 0.0
+			dead.emit()
 		_: 
 			assert(false, "Invalid state passed to change_state: %s" % new_state)
 	
@@ -116,3 +124,6 @@ func set_lives(value: int) -> void:
 		change_state(Status.DEAD)
 	else:
 		change_state(Status.INVULNERABLE)
+
+func _on_invulnerability_timer_timeout() -> void:
+	change_state(Status.ALIVE)
