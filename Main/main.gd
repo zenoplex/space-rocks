@@ -4,8 +4,8 @@ extends Node
 var level := 0
 var score := 0
 var playing := false
-@onready var player: Player = $Player
-@onready var hud: HUD = $HUD
+@onready var player: Player = get_node('Player')
+@onready var hud: HUD = get_node('HUD')
 @onready var rockSpawn: PathFollow2D = $RockPath/RockSpawn
 
 # Type annotation is required for for loops
