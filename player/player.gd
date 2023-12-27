@@ -11,6 +11,7 @@ signal dead
 @export var spin_power: int = 8000
 
 @onready var explosion: Node2D = get_node("Explosion")
+@onready var invulnerabilityTimer: Timer = get_node("InvulnerabilityTimer")
 
 enum Status { INIT, ALIVE, INVULNERABLE, DEAD }
 var state :Status = Status.INIT
@@ -25,6 +26,9 @@ var lives := 0: set = set_lives
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	explosion.hide()
+	invulnerabilityTimer.one_shot = true
+	invulnerabilityTimer.wait_time = 2.0
+
 	$GunCooldownTimer.wait_time = fire_rate
 	linear_damp = 1.0
 	angular_damp = 5.0
