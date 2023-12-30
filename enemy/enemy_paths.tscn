@@ -1,4 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dv25id0ufpy5e"]
+[gd_scene load_steps=6 format=3 uid="uid://dv25id0ufpy5e"]
+
+[ext_resource type="Script" path="res://enemy/enemy_paths.gd" id="1_ttnxg"]
 
 [sub_resource type="Curve2D" id="Curve2D_ctpp3"]
 _data = {
@@ -25,6 +27,7 @@ _data = {
 point_count = 10
 
 [node name="EnemyPaths" type="Node"]
+script = ExtResource("1_ttnxg")
 
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource("Curve2D_ctpp3")
