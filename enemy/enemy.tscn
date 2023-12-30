@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://dsqiejkyagq4q"]
+
+[ext_resource type="Texture2D" uid="uid://bera7n31wvgs8" path="res://assets/enemy_saucer.png" id="1_vho2j"]
+[ext_resource type="Script" path="res://enemy/enemy.gd" id="1_vtqug"]
+[ext_resource type="PackedScene" uid="uid://bh3hkj080frmf" path="res://explosion/explosion.tscn" id="3_x6iwf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_68tlx"]
+radius = 32.0
+
+[sub_resource type="Animation" id="Animation_yhvi4"]
+resource_name = "flash"
+length = 0.25
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.16, 0.2, 0.24),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_q74bd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gola2"]
+_data = {
+"RESET": SubResource("Animation_q74bd"),
+"flash": SubResource("Animation_yhvi4")
+}
+
+[node name="Enemy" type="Area2D"]
+script = ExtResource("1_vtqug")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_vho2j")
+hframes = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_68tlx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gola2")
+}
+
+[node name="Explosion" parent="." instance=ExtResource("3_x6iwf")]
+
+[node name="GunCooldownTimer" type="Timer" parent="."]
