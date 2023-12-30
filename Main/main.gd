@@ -1,5 +1,6 @@
 extends Node
 @export var rock_scene: PackedScene
+@export var enemy_scene: PackedScene
 
 var level := 0
 var score := 0
@@ -7,6 +8,7 @@ var playing := false
 @onready var player: Player = get_node('Player')
 @onready var hud: HUD = get_node('HUD')
 @onready var rockSpawn: PathFollow2D = $RockPath/RockSpawn
+@onready var enemySpawnTimer: Timer = $EnemySpawnTimer
 
 # Type annotation is required for for loops
 const offsets: Array[int] = [-1 ,1]
@@ -17,6 +19,7 @@ func _ready() -> void:
 	screensize = get_viewport().get_visible_rect().size
 	# To enable input while paused
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	enemySpawnTimer.one_shot = true
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -43,6 +46,8 @@ func new_level() -> void:
 	hud.show_message("Wave %s" % level)
 	for i in level:
 		spawn_rock(getRockSpawnPosition(), getRockSpawnVelocity(), 3)
+	enemySpawnTimer.wait_time = randf_range(5, 10)
+	enemySpawnTimer.start()
 
 func game_over() -> void:
 	playing = false
@@ -93,3 +98,6 @@ func _input(event: InputEvent) -> void:
 			false:
 				hud.reset_message()
 
+func _on_enemy_spawn_timer_timeout() -> void:
+	var node: Enemy = enemy_scene.instantiate()
+	add_child(node)
