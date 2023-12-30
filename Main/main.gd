@@ -15,6 +15,8 @@ var screensize := Vector2.ZERO
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	screensize = get_viewport().get_visible_rect().size
+	# To enable input while paused
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -75,4 +77,10 @@ func _on_rock_exploded(size: int, radius: int, position: Vector2, linear_velocit
 ## Connected with hud's start_game signal
 func _on_hud_start_game() -> void:
 	new_game()
-		
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause"):
+		match playing:
+			true:
+				var scene_tree := get_tree()
+				scene_tree.paused = not scene_tree.paused
