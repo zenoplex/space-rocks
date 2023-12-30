@@ -1,6 +1,8 @@
 class_name Enemy
 extends Area2D
 
+@export var bullet_scene: PackedScene
+
 @onready var gunCooldownTimer: Timer = get_node("GunCooldownTimer")
 @onready var explostion: Explosion = get_node("Explosion")
 
@@ -9,5 +11,7 @@ func _ready() -> void:
 	gunCooldownTimer.one_shot = true
 	gunCooldownTimer.wait_time = 1.5
 	gunCooldownTimer.autostart = true
+	explostion.hide()
 
-
+func _on_gun_cooldown_timer_timeout() -> void:
+	pass # Replace with function body.

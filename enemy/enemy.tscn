@@ -45,7 +45,7 @@ _data = {
 "flash": SubResource("Animation_yhvi4")
 }
 
-[node name="Enemy" type="Area2D"]
+[node name="Enemy" type="Area2D" groups=["enemies"]]
 script = ExtResource("1_vtqug")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -63,3 +63,5 @@ libraries = {
 [node name="Explosion" parent="." instance=ExtResource("3_x6iwf")]
 
 [node name="GunCooldownTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="GunCooldownTimer" to="." method="_on_gun_cooldown_timer_timeout"]
