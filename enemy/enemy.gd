@@ -21,8 +21,20 @@ func _ready() -> void:
 	explostion.hide()
 	sprite2D.frame = randi() % 3
 	var path := enemyPaths.get_children()[randi() % enemyPaths.get_child_count()]
+
+	if not path: 
+		assert(false, "enemyPaths is empty")
+
 	path.add_child(followPath)
 	followPath.loop = false
+
+func _physics_process(delta: float) -> void:
+	rotation += deg_to_rad(rotation_speed) * delta
+	followPath.progress += speed * delta
+	position = followPath.position
+	if followPath.progress_ratio >= 1:
+		queue_free()
+
 
 func _on_gun_cooldown_timer_timeout() -> void:
 	pass # Replace with function body.
