@@ -101,3 +101,5 @@ func _input(event: InputEvent) -> void:
 func _on_enemy_spawn_timer_timeout() -> void:
 	var node: Enemy = enemy_scene.instantiate()
 	add_child(node)
+	node.target = player
+	enemySpawnTimer.start(randf_range(20, 40))

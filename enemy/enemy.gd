@@ -7,6 +7,8 @@ var speed := 150
 var rotation_speed := 120
 var health := 3
 var followPath := PathFollow2D.new()
+# GDscript doeesn't support union types yet
+var target: Player = null
 
 @onready var gunCooldownTimer: Timer = get_node("GunCooldownTimer")
 @onready var explostion: Explosion = get_node("Explosion")
