@@ -4,15 +4,12 @@ extends Area2D
 var speed := 1000
 var velocity := Vector2.ZERO
 
-func _ready() -> void:
-	start(transform)
-
-func start(_transform: Transform2D) -> void:
-	transform = _transform
-	velocity = transform.x * speed
+func start(_position: Vector2, _direction: Vector2) -> void:
+	position = _position
+	rotation = _direction.angle()
 
 func _process(delta: float) -> void:
-	position += velocity * delta
+	position += transform.x * speed * delta
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()
