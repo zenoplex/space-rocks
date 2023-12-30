@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://dv25id0ufpy5e"]
+
+[sub_resource type="Curve2D" id="Curve2D_ctpp3"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -32, 88, -152.549, -61.3772, 152.549, 61.3772, 288, 368, -128.713, -72.6992, 128.713, 72.6992, 312, 576, -190.091, 80.4459, 190.091, -80.4459, 1040, 536, 245.509, -122.754, -245.509, 122.754, 840, 200, 0, 0, 0, 0, 592, 32)
+}
+point_count = 6
+
+[sub_resource type="Curve2D" id="Curve2D_56oxc"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -80, 584, -98.3227, 25.6235, 98.3227, -25.6235, 224, 584, -220.481, 7.15074, 220.481, -7.15074, 600, 48, -76.8705, -55.4183, 76.8705, 55.4183, 800, 568, -48.8634, 104.282, 48.8634, -104.282, 1048, 576, -146.59, 138.844, 146.59, -138.844, 104, 120, 0, 0, 0, 0, 1168, 128)
+}
+point_count = 7
+
+[sub_resource type="Curve2D" id="Curve2D_gtnfg"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1216, 48, 112.624, -61.3772, -112.624, 61.3772, 64, 56, -211.543, -115.604, 211.543, 115.604, 64, 592, -179.365, 146.59, 179.365, -146.59, 1096, 592, 0, 0, 0, 0, 1088, -128)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_avq13"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1024, 752, 142.419, 106.665, -142.419, -106.665, 840, 128, 86.4048, -60.7813, -86.4048, 60.7813, 352, 144, -9.53433, -20.8563, 9.53433, 20.8563, 312, 320, -117.391, -57.8019, 117.391, 57.8019, 456, 576, 2.38358, 87.0007, -2.38358, -87.0007, 768, 320, 66.1444, 1.78769, -66.1444, -1.78769, 656, 176, 38.7332, -50.0552, -38.7332, 50.0552, 488, 232, 32.1784, -70.9116, -32.1784, 70.9116, 456, 376, 0, 0, 0, 0, -56, 720)
+}
+point_count = 10
+
+[node name="EnemyPaths" type="Node"]
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_ctpp3")
+
+[node name="Path2D2" type="Path2D" parent="."]
+curve = SubResource("Curve2D_56oxc")
+
+[node name="Path2D3" type="Path2D" parent="."]
+curve = SubResource("Curve2D_gtnfg")
+metadata/_edit_lock_ = true
+
+[node name="Path2D4" type="Path2D" parent="."]
+curve = SubResource("Curve2D_avq13")
+metadata/_edit_lock_ = true
