@@ -2,7 +2,7 @@ class_name Enemy
 extends Area2D
 
 @export var bullet_scene: PackedScene
-
+var bullet_spread := 0.2
 var speed := 150
 var rotation_speed := 120
 var health := 3
@@ -19,7 +19,7 @@ var target: Player = null
 func _ready() -> void:
 	gunCooldownTimer.one_shot = true
 	gunCooldownTimer.wait_time = 1.5
-	gunCooldownTimer.autostart = true
+	gunCooldownTimer.start()
 	explostion.hide()
 	sprite2D.frame = randi() % 3
 	var path := enemyPaths.get_children()[randi() % enemyPaths.get_child_count()]
@@ -39,4 +39,16 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_gun_cooldown_timer_timeout() -> void:
-	pass # Replace with function body.
+	shoot()
+	gunCooldownTimer.start()
+
+func shoot() -> void:
+	if not target:
+		return
+
+	var direction := global_position.direction_to(target.global_position)
+	var rotated_direction := direction.rotated(randf_range(-bullet_spread, bullet_spread))
+	var node: EnemyBullet = bullet_scene.instantiate()
+	get_tree().root.add_child(node)
+	node.start(position, rotated_direction)
+	
