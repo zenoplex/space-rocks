@@ -25,11 +25,19 @@ func _on_timer_timeout() -> void:
 	message_label.hide()
 	message_label.text = ""
 
+# TODO: method name is ambiguous since Timer starts at the same time
 ## Shows message and starts timer
 func show_message(text: String) -> void:
+	update_message(text)
+	$Timer.start()
+
+func update_message(text: String) -> void:
 	message_label.text = text
 	message_label.show()
-	$Timer.start()
+
+func reset_message() -> void:
+	message_label.text = ""
+	message_label.hide()
 
 func update_score(score: int) -> void:
 	score_label.text = str(score)
