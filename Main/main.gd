@@ -80,7 +80,16 @@ func _on_hud_start_game() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
-		match playing:
+		if not playing:
+			return
+
+		var scene_tree := get_tree()
+		# Toggle paused state
+		var is_paused := not scene_tree.paused
+		scene_tree.paused = is_paused
+		match is_paused:
 			true:
-				var scene_tree := get_tree()
-				scene_tree.paused = not scene_tree.paused
+				hud.update_message("Paused")
+			false:
+				hud.reset_message()
+
