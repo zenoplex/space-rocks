@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dsqiejkyagq4q"]
+[gd_scene load_steps=9 format=3 uid="uid://dsqiejkyagq4q"]
 
 [ext_resource type="Texture2D" uid="uid://bera7n31wvgs8" path="res://assets/enemy_saucer.png" id="1_vho2j"]
 [ext_resource type="Script" path="res://enemy/enemy.gd" id="1_vtqug"]
 [ext_resource type="PackedScene" uid="uid://bh3hkj080frmf" path="res://explosion/explosion.tscn" id="3_x6iwf"]
+[ext_resource type="PackedScene" uid="uid://dv25id0ufpy5e" path="res://enemy/enemy_paths.tscn" id="4_thhk2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_68tlx"]
 radius = 32.0
@@ -63,5 +64,7 @@ libraries = {
 [node name="Explosion" parent="." instance=ExtResource("3_x6iwf")]
 
 [node name="GunCooldownTimer" type="Timer" parent="."]
+
+[node name="EnemyPaths" parent="." instance=ExtResource("4_thhk2")]
 
 [connection signal="timeout" from="GunCooldownTimer" to="." method="_on_gun_cooldown_timer_timeout"]
