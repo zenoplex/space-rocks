@@ -40,8 +40,6 @@ func _ready() -> void:
 	angular_damp = 5.0
 	screensize = get_viewport_rect().size
 	size = collisionShape2D.shape.get_rect().size
-	# TODO: set to INIT after testing
-	change_state(Status.ALIVE)
 
 func change_state(new_state: Status) -> void:
 	match new_state:
