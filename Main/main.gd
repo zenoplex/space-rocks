@@ -54,11 +54,12 @@ func game_over() -> void:
 	hud.game_over()
 
 func spawn_rock(position: Vector2, velocity: Vector2, size: int) -> void:
-	var node := rock_scene.instantiate()
+	var node := rock_scene.instantiate() as Rock
 	node.screensize = screensize
-	node.start(position, velocity, size)
 	call_deferred("add_child", node)
 	node.exploded.connect(self._on_rock_exploded)
+	# Cannot call node.start because Rock as onready reference which will be null without path search
+	node.call_deferred("start", position, velocity, size)
 
 ## get rock initial position
 func getRockSpawnPosition() -> Vector2:
