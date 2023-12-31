@@ -1,3 +1,4 @@
+class_name Rock
 extends RigidBody2D
 # emits size, radius, position, linear_velocity)
 signal exploded

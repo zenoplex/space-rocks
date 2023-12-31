@@ -137,8 +137,9 @@ func _explode() -> void:
 	await explosion.play()
 
 func _on_body_entered(body:Node) -> void:
-	if body.is_in_group("rocks"):
-		body.explode()
+	if body is Rock:
+		var node := body as Rock
+		node.explode()
 		lives -= 1
 		_explode()
 
