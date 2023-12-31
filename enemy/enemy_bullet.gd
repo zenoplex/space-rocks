@@ -3,6 +3,7 @@ extends Area2D
 
 var speed := 600
 var velocity := Vector2.ZERO
+var damage := 15
 
 func start(_position: Vector2, _direction: Vector2) -> void:
 	position = _position
@@ -15,4 +16,6 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()
 
 func _on_body_entered(_body: Node2D) -> void:
+	if _body is Player:
+		_body.shield -= damage
 	queue_free()

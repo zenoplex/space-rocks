@@ -9,6 +9,7 @@ var health := 3
 var followPath := PathFollow2D.new()
 # GDscript doeesn't support union types yet
 var target: Player = null
+var damage := 50
 
 @onready var gunCooldownTimer: Timer = get_node("GunCooldownTimer")
 @onready var explostion: Explosion = get_node("Explosion")
@@ -81,5 +82,8 @@ func explode() -> void:
 func _on_body_entered(body:Node2D) -> void:
 	if body.is_in_group("rocks"):
 		return
+	if body is Player:
+		var player := body as Player
+		player.shield -= damage
 	take_damage(1)
 		
