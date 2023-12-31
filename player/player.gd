@@ -4,11 +4,16 @@ extends RigidBody2D
 ## Emits lives_changed(lives: int)
 signal lives_changed
 signal dead
+## Emits shield_changed(shield_percent: float)
+signal shield_changed
 
 @export var bullet_scene: PackedScene
 @export var fire_rate: float = 0.25
 @export var engine_power: int = 500
 @export var spin_power: int = 8000
+var max_shield := 100.0
+var shield_regen := 5.0
+var shield := 0: set = set_shield
 
 @onready var explosion: Explosion = get_node("Explosion")
 @onready var invulnerabilityTimer: Timer = get_node("InvulnerabilityTimer")
@@ -136,3 +141,13 @@ func _on_body_entered(body:Node) -> void:
 		body.explode()
 		lives -= 1
 		_explode()
+
+func set_shield(value: float) -> void:
+	var new_shield: Variant = min(value, max_shield)
+	if new_shield is float:
+		shield = new_shield
+		shield_changed.emit(new_shield / max_shield)
+		if shield < 1:
+			lives -= 1
+			_explode()
+	
