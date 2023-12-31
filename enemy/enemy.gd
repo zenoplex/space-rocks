@@ -39,7 +39,11 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_gun_cooldown_timer_timeout() -> void:
-	shoot()
+	if randf() < 0.2:
+		shoot_pulse(3, 0.3)
+	else:
+		shoot()
+	
 	gunCooldownTimer.start()
 
 func shoot() -> void:
@@ -51,4 +55,9 @@ func shoot() -> void:
 	var node: EnemyBullet = bullet_scene.instantiate()
 	get_tree().root.add_child(node)
 	node.start(position, rotated_direction)
-	
+
+func shoot_pulse(shots: int, delay: float)-> void:
+	for i in shots:
+		shoot()
+		var timer := get_tree().create_timer(delay)
+		await timer.timeout
