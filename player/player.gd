@@ -142,7 +142,7 @@ func _on_body_entered(body:Node) -> void:
 	if body is Rock:
 		var node := body as Rock
 		node.explode()
-		# TODO: Maybe damage should Rock property?
+		# TODO: All base damage should be set in game settings
 		shield -= node.size * 25
 
 func set_shield(value: float) -> void:
