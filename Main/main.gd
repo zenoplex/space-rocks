@@ -104,3 +104,7 @@ func _on_enemy_spawn_timer_timeout() -> void:
 	add_child(node)
 	node.target = player
 	enemySpawnTimer.start(randf_range(20, 40))
+
+func _on_player_lives_changed(lives: int) -> void:
+	hud.update_lives(lives)
+	
