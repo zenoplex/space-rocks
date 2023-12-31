@@ -15,6 +15,7 @@ var target: Player = null
 @onready var sprite2D: Sprite2D = get_node("Sprite2D")
 @onready var enemyPaths: EnemyPaths = get_node("EnemyPaths")
 @onready var animationPlayer: AnimationPlayer = get_node("AnimationPlayer")
+@onready var collisionShape2D: CollisionShape2D = get_node("CollisionShape2D")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -67,6 +68,14 @@ func take_damage(value: int) -> void:
 	health -= value
 	animationPlayer.play("flash")
 	
+func explode() -> void:
+	speed = 0
+	sprite2D.hide()
+	gunCooldownTimer.stop()
+	collisionShape2D.set_deferred("disabled", true)
+	await explostion.play()
+	queue_free()
+
 func _on_body_entered(body:Node2D) -> void:
 	if body.is_in_group("rocks"):
 		return
