@@ -67,6 +67,8 @@ func shoot_pulse(shots: int, delay: float)-> void:
 func take_damage(value: int) -> void:
 	health -= value
 	animationPlayer.play("flash")
+	if health < 1:
+		explode()
 	
 func explode() -> void:
 	speed = 0
