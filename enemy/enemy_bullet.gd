@@ -1,7 +1,7 @@
 class_name EnemyBullet
 extends Area2D
 
-var speed := 1000
+var speed := 600
 var velocity := Vector2.ZERO
 
 func start(_position: Vector2, _direction: Vector2) -> void:
