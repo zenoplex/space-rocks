@@ -69,4 +69,5 @@ libraries = {
 
 [node name="EnemyPaths" parent="." instance=ExtResource("4_thhk2")]
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="GunCooldownTimer" to="." method="_on_gun_cooldown_timer_timeout"]
