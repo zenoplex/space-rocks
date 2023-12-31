@@ -13,7 +13,7 @@ signal shield_changed
 @export var spin_power: int = 8000
 var max_shield := 100.0
 var shield_regen := 5.0
-var shield := 0: set = set_shield
+var shield := 0.0: set = set_shield
 
 @onready var explosion: Explosion = get_node("Explosion")
 @onready var invulnerabilityTimer: Timer = get_node("InvulnerabilityTimer")
@@ -98,6 +98,7 @@ func get_input() -> void:
 func reset() -> void:
 	reset_pos = true
 	lives = 3
+	shield = max_shield
 	sprite2D.show()
 	change_state(Status.ALIVE)
 
@@ -125,6 +126,7 @@ func _on_gun_cooldown_timer_timeout() -> void:
 func set_lives(value: int) -> void:
 	lives = value
 	lives_changed.emit(lives)
+	shield = max_shield
 	if (lives < 1):
 		change_state(Status.DEAD)
 	else:
@@ -140,11 +142,12 @@ func _on_body_entered(body:Node) -> void:
 	if body is Rock:
 		var node := body as Rock
 		node.explode()
-		lives -= 1
-		_explode()
+		# TODO: Maybe damage should Rock property?
+		shield -= node.size * 25
 
 func set_shield(value: float) -> void:
 	var new_shield: Variant = min(value, max_shield)
+	print_debug("set_shield: %s" % new_shield)
 	if new_shield is float:
 		shield = new_shield
 		shield_changed.emit(new_shield / max_shield)
