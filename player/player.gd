@@ -69,9 +69,9 @@ func change_state(new_state: Status) -> void:
 	
 	state = new_state
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	get_input()
+	shield += shield_regen * _delta
 
 func shoot() -> void:
 	if state == Status.INVULNERABLE:
