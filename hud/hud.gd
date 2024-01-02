@@ -3,10 +3,18 @@ extends CanvasLayer
 
 signal start_game
 
+# TOOD: use get_node instead of $path
 @onready var lives_counter: HBoxContainer = $MarginContainer/HBoxContainer/LivesCounter
 @onready var score_label: Label = $MarginContainer/HBoxContainer/ScoreLabel
 @onready var message_label: Label = $VBoxContainer/MessageLabel
 @onready var start_button: TextureButton = $VBoxContainer/StartButton
+@onready var shield_bar: TextureProgressBar = get_node("ShieldBar")
+
+const bar_textures: Dictionary = {
+	"green": preload("./bar_green_200.png"),
+	"yellow": preload("./bar_yellow_200.png"),
+	"red": preload("./bar_red_200.png")
+}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
