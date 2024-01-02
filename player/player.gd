@@ -71,7 +71,8 @@ func change_state(new_state: Status) -> void:
 
 func _process(_delta: float) -> void:
 	get_input()
-	shield += shield_regen * _delta
+	if state == Status.ALIVE:
+		shield += shield_regen * _delta
 
 func shoot() -> void:
 	if state == Status.INVULNERABLE:
@@ -147,7 +148,7 @@ func _on_body_entered(body:Node) -> void:
 
 func set_shield(value: float) -> void:
 	var new_shield: Variant = min(value, max_shield)
-	print_debug("set_shield: %s" % new_shield)
+	
 	if new_shield is float:
 		shield = new_shield
 		shield_changed.emit(new_shield / max_shield)
