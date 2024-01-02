@@ -8,7 +8,7 @@ signal start_game
 @onready var score_label: Label = $MarginContainer/HBoxContainer/ScoreLabel
 @onready var message_label: Label = $VBoxContainer/MessageLabel
 @onready var start_button: TextureButton = $VBoxContainer/StartButton
-@onready var shield_bar: TextureProgressBar = get_node("ShieldBar")
+@onready var shield_bar: TextureProgressBar = get_node("MarginContainer/HBoxContainer/ShieldBar")
 
 const bar_textures: Dictionary = {
 	"green": preload("./bar_green_200.png"),
@@ -56,6 +56,16 @@ func update_lives(lives: int) -> void:
 	# for child in children: will error since Node > int is an error
 	for index in len(children):
 		children[index].visible = index < lives
+
+func update_shield(value: float) -> void:
+	shield_bar.value = value
+
+	if value > 0.66:
+		shield_bar.texture_progress = bar_textures["green"]
+	elif value > 0.33:
+		shield_bar.texture_progress = bar_textures["yellow"]
+	else:
+		shield_bar.texture_progress = bar_textures["red"]
 
 ## Displays game over message and shows start button
 func game_over() -> void:
