@@ -3,11 +3,10 @@ extends CanvasLayer
 
 signal start_game
 
-# TOOD: use get_node instead of $path
-@onready var lives_counter: HBoxContainer = $MarginContainer/HBoxContainer/LivesCounter
-@onready var score_label: Label = $MarginContainer/HBoxContainer/ScoreLabel
-@onready var message_label: Label = $VBoxContainer/MessageLabel
-@onready var start_button: TextureButton = $VBoxContainer/StartButton
+@onready var lives_counter: HBoxContainer = get_node("MarginContainer/HBoxContainer/LivesCounter")
+@onready var score_label: Label = get_node("MarginContainer/HBoxContainer/ScoreLabel")
+@onready var message_label: Label = get_node("VBoxContainer/MessageLabel")
+@onready var start_button: TextureButton = get_node("VBoxContainer/StartButton")
 @onready var shield_bar: TextureProgressBar = get_node("MarginContainer/HBoxContainer/ShieldBar")
 
 const bar_textures: Dictionary = {
