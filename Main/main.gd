@@ -108,3 +108,6 @@ func _on_enemy_spawn_timer_timeout() -> void:
 func _on_player_lives_changed(lives: int) -> void:
 	hud.update_lives(lives)
 	
+func _on_player_shield_changed(value: float) -> void:
+	hud.update_shield(value)		
+	
