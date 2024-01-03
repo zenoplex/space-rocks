@@ -10,7 +10,6 @@ var playing := false
 @onready var rockSpawn: PathFollow2D = $RockPath/RockSpawn
 @onready var enemySpawnTimer: Timer = $EnemySpawnTimer
 @onready var level_up_sound: AudioStreamPlayer = get_node("LevelUpSound")
-@onready var explostion_sound: AudioStreamPlayer = get_node("ExplosionSound")
 @onready var music: AudioStreamPlayer = get_node("Music")
 
 # Type annotation is required for for loops
@@ -84,8 +83,7 @@ func _on_rock_exploded(size: int, radius: int, position: Vector2, linear_velocit
 		var new_position := position + direction * radius
 		var new_velocity := direction * linear_velocity.length() * 1.1
 		spawn_rock(new_position, new_velocity, size - 1)
-	explostion_sound.play()
-
+	
 ## Connected with hud's start_game signal
 func _on_hud_start_game() -> void:
 	new_game()
