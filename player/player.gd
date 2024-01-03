@@ -21,6 +21,8 @@ var shield := 0.0: set = set_shield
 @onready var gunCooldownTimer: Timer = get_node("GunCooldownTimer")
 @onready var muzzle: Node2D = get_node("Muzzle")
 @onready var sprite2D: Sprite2D = get_node("Sprite2D")
+@onready var engine_sound: AudioStreamPlayer = get_node("EngineSound")
+@onready var laser_sound: AudioStreamPlayer = get_node("LaserSound")
 
 enum Status { INIT, ALIVE, INVULNERABLE, DEAD }
 var state :Status = Status.INIT
@@ -83,6 +85,7 @@ func shoot() -> void:
 	var node: Bullet = bullet_scene.instantiate() as Bullet
 	node.start(muzzle.global_transform)
 	get_tree().root.add_child(node)
+	laser_sound.play()
 
 func get_input() -> void:
 	thrust = Vector2.ZERO
@@ -92,7 +95,11 @@ func get_input() -> void:
 	if Input.is_action_pressed("thrust"):
 		thrust = transform.x * engine_power
 		rotation_dir = Input.get_axis("rotate_left", "rotate_right")
-	
+		if not engine_sound.playing:
+			engine_sound.play()
+	else:
+		engine_sound.stop()
+
 	if Input.is_action_pressed("shoot") and can_shoot:
 		shoot()
 
