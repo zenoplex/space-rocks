@@ -84,6 +84,7 @@ func _on_rock_exploded(size: int, radius: int, position: Vector2, linear_velocit
 		var new_position := position + direction * radius
 		var new_velocity := direction * linear_velocity.length() * 1.1
 		spawn_rock(new_position, new_velocity, size - 1)
+	explostion_sound.play()
 
 ## Connected with hud's start_game signal
 func _on_hud_start_game() -> void:
