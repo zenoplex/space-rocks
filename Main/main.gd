@@ -9,6 +9,9 @@ var playing := false
 @onready var hud: HUD = get_node('HUD')
 @onready var rockSpawn: PathFollow2D = $RockPath/RockSpawn
 @onready var enemySpawnTimer: Timer = $EnemySpawnTimer
+@onready var level_up_sound: AudioStreamPlayer = get_node("LevelUpSound")
+@onready var explostion_sound: AudioStreamPlayer = get_node("ExplosionSound")
+@onready var music: AudioStreamPlayer = get_node("Music")
 
 # Type annotation is required for for loops
 const offsets: Array[int] = [-1 ,1]
@@ -40,6 +43,7 @@ func new_game() -> void:
 	# Maybe should emit a signal instead
 	await hud.get_node('Timer').timeout
 	playing = true
+	music.play()
 
 func new_level() -> void:
 	level += 1
@@ -52,6 +56,7 @@ func new_level() -> void:
 func game_over() -> void:
 	playing = false
 	hud.game_over()
+	music.stop()
 
 func spawn_rock(position: Vector2, velocity: Vector2, size: int) -> void:
 	var node := rock_scene.instantiate() as Rock
