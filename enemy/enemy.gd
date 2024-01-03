@@ -17,6 +17,7 @@ var damage := 50
 @onready var enemyPaths: EnemyPaths = get_node("EnemyPaths")
 @onready var animationPlayer: AnimationPlayer = get_node("AnimationPlayer")
 @onready var collisionShape2D: CollisionShape2D = get_node("CollisionShape2D")
+@onready var laser_sound: AudioStreamPlayer = get_node("LaserSound")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -58,6 +59,7 @@ func shoot() -> void:
 	var node: EnemyBullet = bullet_scene.instantiate()
 	get_tree().root.add_child(node)
 	node.start(position, rotated_direction)
+	laser_sound.play()
 
 func shoot_pulse(shots: int, delay: float)-> void:
 	for i in shots:

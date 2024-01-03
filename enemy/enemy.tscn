@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dsqiejkyagq4q"]
+[gd_scene load_steps=11 format=3 uid="uid://dsqiejkyagq4q"]
 
 [ext_resource type="Script" path="res://enemy/enemy.gd" id="1_vtqug"]
 [ext_resource type="PackedScene" uid="uid://23ujf6useexo" path="res://enemy/enemy_bullet.tscn" id="2_yyp8x"]
 [ext_resource type="Texture2D" uid="uid://bera7n31wvgs8" path="res://enemy/enemy_saucer.png" id="3_jkrh6"]
 [ext_resource type="PackedScene" uid="uid://bh3hkj080frmf" path="res://explosion/explosion.tscn" id="3_x6iwf"]
 [ext_resource type="PackedScene" uid="uid://dv25id0ufpy5e" path="res://enemy/enemy_paths.tscn" id="4_thhk2"]
+[ext_resource type="AudioStream" uid="uid://c6iawx3ugngvh" path="res://enemy/enemy_laser.wav" id="6_5f5a7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_68tlx"]
 radius = 32.0
@@ -68,6 +69,9 @@ libraries = {
 [node name="GunCooldownTimer" type="Timer" parent="."]
 
 [node name="EnemyPaths" parent="." instance=ExtResource("4_thhk2")]
+
+[node name="LaserSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_5f5a7")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="GunCooldownTimer" to="." method="_on_gun_cooldown_timer_timeout"]
