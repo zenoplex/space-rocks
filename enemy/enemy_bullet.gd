@@ -18,4 +18,6 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 func _on_body_entered(_body: Node2D) -> void:
 	if _body is Player:
 		_body.shield -= damage
+	if _body is Rock:
+		_body.explode()
 	queue_free()
