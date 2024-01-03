@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://dsqiejkyagq4q"]
 
-[ext_resource type="Texture2D" uid="uid://bera7n31wvgs8" path="res://assets/enemy_saucer.png" id="1_vho2j"]
 [ext_resource type="Script" path="res://enemy/enemy.gd" id="1_vtqug"]
 [ext_resource type="PackedScene" uid="uid://23ujf6useexo" path="res://enemy/enemy_bullet.tscn" id="2_yyp8x"]
+[ext_resource type="Texture2D" uid="uid://bera7n31wvgs8" path="res://enemy/enemy_saucer.png" id="3_jkrh6"]
 [ext_resource type="PackedScene" uid="uid://bh3hkj080frmf" path="res://explosion/explosion.tscn" id="3_x6iwf"]
 [ext_resource type="PackedScene" uid="uid://dv25id0ufpy5e" path="res://enemy/enemy_paths.tscn" id="4_thhk2"]
 
@@ -52,7 +52,7 @@ script = ExtResource("1_vtqug")
 bullet_scene = ExtResource("2_yyp8x")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_vho2j")
+texture = ExtResource("3_jkrh6")
 hframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

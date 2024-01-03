@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dhu0cmb1owl3b"
-path="res://.godot/imported/player_small.png-270bf105e6b5d1378334eb7b7468de42.ctex"
+uid="uid://bera7n31wvgs8"
+path="res://.godot/imported/enemy_saucer.png-a2472ce4593c458cb9eacf51026b6ef1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player_small.png"
-dest_files=["res://.godot/imported/player_small.png-270bf105e6b5d1378334eb7b7468de42.ctex"]
+source_file="res://enemy/enemy_saucer.png"
+dest_files=["res://.godot/imported/enemy_saucer.png-a2472ce4593c458cb9eacf51026b6ef1.ctex"]
 
 [params]
 
