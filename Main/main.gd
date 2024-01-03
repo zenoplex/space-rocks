@@ -114,4 +114,7 @@ func _on_player_lives_changed(lives: int) -> void:
 	
 func _on_player_shield_changed(value: float) -> void:
 	hud.update_shield(value)		
+
+func _on_player_dead() -> void:
+	game_over()
 	
