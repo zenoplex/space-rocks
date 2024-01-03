@@ -4,9 +4,6 @@ extends Area2D
 
 var velocity := Vector2.ZERO
 
-func _ready() -> void:
-	start(transform)
-
 func start(_transform: Transform2D) -> void:
 	transform = _transform
 	velocity = transform.x * speed
