@@ -80,7 +80,7 @@ func explode() -> void:
 	queue_free()
 
 func _on_body_entered(body:Node2D) -> void:
-	if body.is_in_group("rocks"):
+	if body is Rock:
 		return
 	if body is Player:
 		var player := body as Player
