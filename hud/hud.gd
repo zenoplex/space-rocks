@@ -8,6 +8,7 @@ signal start_game
 @onready var message_label: Label = get_node("VBoxContainer/MessageLabel")
 @onready var start_button: TextureButton = get_node("VBoxContainer/StartButton")
 @onready var shield_bar: TextureProgressBar = get_node("MarginContainer/HBoxContainer/ShieldBar")
+@onready var timer: Timer = get_node("Timer")
 
 const BAR_TEXTURES: Dictionary = {
 	"green": preload("./bar_green_200.png"),
@@ -23,11 +24,10 @@ func _on_timer_timeout() -> void:
 	message_label.hide()
 	message_label.text = ""
 
-# TODO: method name is ambiguous since Timer starts at the same time
 ## Shows message and starts timer
-func show_message(text: String) -> void:
+func show_message_and_start_timer(text: String) -> void:
 	update_message(text)
-	$Timer.start()
+	timer.start()
 
 func update_message(text: String) -> void:
 	message_label.text = text
@@ -59,6 +59,6 @@ func update_shield(value: float) -> void:
 
 ## Displays game over message and shows start button
 func game_over() -> void:
-	show_message("Game Over")
+	show_message_and_start_timer("Game Over")
 	await $Timer.timeout
 	start_button.show()

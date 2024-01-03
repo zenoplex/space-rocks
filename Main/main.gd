@@ -34,7 +34,7 @@ func new_game() -> void:
 	level = 0
 	score = 0
 	hud.update_score(score)
-	hud.show_message("Get Ready!")
+	hud.show_message_and_start_timer("Get Ready!")
 	player.reset()
 	# HUD show_message starts timer but it's not obvious from the code
 	# Maybe should emit a signal instead
@@ -43,7 +43,7 @@ func new_game() -> void:
 
 func new_level() -> void:
 	level += 1
-	hud.show_message("Wave %s" % level)
+	hud.show_message_and_start_timer("Wave %s" % level)
 	for i in level:
 		spawn_rock(getRockSpawnPosition(), getRockSpawnVelocity(), 3)
 	enemySpawnTimer.wait_time = randf_range(5, 10)
