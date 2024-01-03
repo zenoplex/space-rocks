@@ -23,6 +23,7 @@ var shield := 0.0: set = set_shield
 @onready var sprite2D: Sprite2D = get_node("Sprite2D")
 @onready var engine_sound: AudioStreamPlayer = get_node("EngineSound")
 @onready var laser_sound: AudioStreamPlayer = get_node("LaserSound")
+@onready var exhaust: GPUParticles2D = get_node("Exhaust")
 
 enum Status { INIT, ALIVE, INVULNERABLE, DEAD }
 var state :Status = Status.INIT
@@ -97,8 +98,11 @@ func get_input() -> void:
 		rotation_dir = Input.get_axis("rotate_left", "rotate_right")
 		if not engine_sound.playing:
 			engine_sound.play()
+			exhaust.emitting = true
+			
 	else:
 		engine_sound.stop()
+		exhaust.emitting = false
 
 	if Input.is_action_pressed("shoot") and can_shoot:
 		shoot()
