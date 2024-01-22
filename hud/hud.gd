@@ -1,7 +1,7 @@
 class_name HUD
 extends CanvasLayer
 
-signal start_game
+signal start_game()
 
 @onready var lives_counter: HBoxContainer = get_node("MarginContainer/HBoxContainer/LivesCounter")
 @onready var score_label: Label = get_node("MarginContainer/HBoxContainer/ScoreLabel")
