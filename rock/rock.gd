@@ -1,7 +1,7 @@
 class_name Rock
 extends RigidBody2D
-# emits size, radius, position, linear_velocity)
-signal exploded
+
+signal exploded(size: int, radius: int, position: Vector2, linear_velocity: Vector2)
 
 var screensize := Vector2.ZERO
 var size := 0

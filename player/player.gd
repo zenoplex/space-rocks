@@ -1,11 +1,9 @@
 class_name Player
 extends RigidBody2D
 
-## Emits lives_changed(lives: int)
-signal lives_changed
-signal dead
-## Emits shield_changed(shield_percent: float)
-signal shield_changed
+signal lives_changed(lives: int)
+signal dead()
+signal shield_changed(shield_percent: float)
 
 @export var bullet_scene: PackedScene
 @export var fire_rate: float = 0.25
